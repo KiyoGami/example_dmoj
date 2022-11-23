@@ -23,7 +23,7 @@ DMOJ_PROBLEM_DATA_ROOT = '/mnt/problems'
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 # Uncomment and set to the domain names this site is intended to serve.
 # You must do this once you set DEBUG to False.
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['18.139.217.98']
 
 # Optional apps that DMOJ can make use of.
 INSTALLED_APPS += (
@@ -89,12 +89,12 @@ STATICFILES_FINDERS += ('compressor.finders.CompressorFinder',)
 
 # The following block is included for your convenience, if you want
 # to use Gmail.
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_USE_TLS = True
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_HOST_USER = os.environ.get('MAIL_USER')
-# EMAIL_HOST_PASSWORD = os.environ.get('MAIL_PASS')
-# EMAIL_PORT = 587
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = os.environ.get('MAIL_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('MAIL_PASS')
+EMAIL_PORT = 587
 
 # To use Mailgun, uncomment this block.
 # You will need to run `pip install django-mailgun` to get `MailgunBackend`.
@@ -112,11 +112,11 @@ STATICFILES_FINDERS += ('compressor.finders.CompressorFinder',)
 # A tuple of (name, email) pairs that specifies those who will be mailed
 # when the server experiences an error when DEBUG = False.
 ADMINS = (
-    ('Your Name', 'your.email@example.com'),
+    ('nyagami', 'hoangquan05112002@gmail.com'),
 )
 
 # The sender for the aforementioned emails.
-SERVER_EMAIL = 'DMOJ: Modern Online Judge <errors@dmoj.ca>'
+# SERVER_EMAIL = 'DMOJ: Modern Online Judge <errors@dmoj.ca>'
 
 
 ################################################
@@ -143,7 +143,7 @@ STATIC_URL = '/static/'
 
 ## DMOJ site display settings.
 SITE_NAME = 'DMOJ'
-SITE_LONG_NAME = 'DMOJ: Modern Online Judge'
+SITE_LONG_NAME = 'Nyagami'
 SITE_ADMIN_EMAIL = 'admin@example.com'
 TERMS_OF_SERVICE_URL = '//dmoj.ca/tos/' # Use a flatpage.
 
@@ -151,7 +151,7 @@ TERMS_OF_SERVICE_URL = '//dmoj.ca/tos/' # Use a flatpage.
 # The judge connection address and port; where the judges will connect to the site.
 # You should change this to something your judges can actually connect to
 # (e.g., a port that is unused and unblocked by a firewall).
-BRIDGED_JUDGE_ADDRESS = [('10.0.2.15', 9999)]
+BRIDGED_JUDGE_ADDRESS = [('172.26.7.81', 9999)]
 
 # The bridged daemon bind address and port to communicate with the site.
 #BRIDGED_DJANGO_ADDRESS = [('localhost', 9998)]
@@ -170,13 +170,13 @@ BAD_MAIL_PROVIDERS = set()
 
 ## Event server.
 # Uncomment to enable live updating. for submission,...
-# EVENT_DAEMON_USE = True
+EVENT_DAEMON_USE = True
 
 # Uncomment this section to use websocket/daemon.js included in the site.
 #EVENT_DAEMON_POST = '<ws:// URL to post to>'
 
 # If you are using the defaults from the guide, it is this:
-#EVENT_DAEMON_POST = 'ws://127.0.0.1:15101/'
+EVENT_DAEMON_POST = 'ws://127.0.0.1:15101/'
 
 # These are the publicly accessed interface configurations.
 # They should match those used by the script.
@@ -186,9 +186,9 @@ BAD_MAIL_PROVIDERS = set()
 # i.e. the path to /channels/ exposed by the daemon, through whatever proxy setup you have.
 
 # Using our standard nginx configuration, these should be:
-#EVENT_DAEMON_GET = 'ws://<your domain>/event/'
+EVENT_DAEMON_GET = 'ws://18.139.217.98/event/'
 #EVENT_DAEMON_GET_SSL = 'wss://<your domain>/event/' # Optional
-#EVENT_DAEMON_POLL = '/channels/'
+EVENT_DAEMON_POLL = '/channels/'
 
 # If you would like to use the AMQP-based event server from <https://github.com/DMOJ/event-server>,
 # uncomment this section instead. This is more involved, and recommended to be done
