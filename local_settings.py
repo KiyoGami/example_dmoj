@@ -23,7 +23,7 @@ DMOJ_PROBLEM_DATA_ROOT = '/mnt/problems'
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 # Uncomment and set to the domain names this site is intended to serve.
 # You must do this once you set DEBUG to False.
-ALLOWED_HOSTS = ['18.139.217.98']
+ALLOWED_HOSTS = ['*']
 
 # Optional apps that DMOJ can make use of.
 INSTALLED_APPS += (
@@ -89,12 +89,12 @@ STATICFILES_FINDERS += ('compressor.finders.CompressorFinder',)
 
 # The following block is included for your convenience, if you want
 # to use Gmail.
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = os.environ.get('MAIL_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('MAIL_PASS')
-EMAIL_PORT = 587
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = os.environ.get('MAIL_USER')
+# EMAIL_HOST_PASSWORD = os.environ.get('MAIL_PASS')
+# EMAIL_PORT = 587
 
 # To use Mailgun, uncomment this block.
 # You will need to run `pip install django-mailgun` to get `MailgunBackend`.
@@ -170,7 +170,7 @@ BAD_MAIL_PROVIDERS = set()
 
 ## Event server.
 # Uncomment to enable live updating. for submission,...
-EVENT_DAEMON_USE = True
+# EVENT_DAEMON_USE = True
 
 # Uncomment this section to use websocket/daemon.js included in the site.
 #EVENT_DAEMON_POST = '<ws:// URL to post to>'
@@ -231,11 +231,11 @@ TIMEZONE_MAP = 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Blue_M
 
 ## PDF rendering settings.
 # Directory to cache the PDF.
-#DMOJ_PDF_PROBLEM_CACHE = '/home/dmoj-uwsgi/pdfcache'
+DMOJ_PDF_PROBLEM_CACHE = '/home/nyagami/pdfcache'
 
 # Path to use for nginx's X-Accel-Redirect feature.
 # Should be an internal location mapped to the above directory.
-#DMOJ_PDF_PROBLEM_INTERNAL = '/pdfcache'
+DMOJ_PDF_PROBLEM_INTERNAL = '/pdfcache'
 
 # Enable Selenium PDF generation.
 #USE_SELENIUM = True
@@ -330,3 +330,36 @@ LOGGING = {
 ## ======== Custom Configuration ========
 # You may add whatever Django configuration you would like here.
 # Do try to keep it separate so you can quickly patch in new settings.
+
+
+# Enable Selenium PDF generation.
+USE_SELENIUM = True
+# Optional paths to Chromium and ChromeDriver.
+SELENIUM_CUSTOM_CHROME_PATH = '/usr/bin/google-chrome'
+SELENIUM_CHROMEDRIVER_PATH = '/home/chromedriver'
+
+# Cache location for generated PDFs. You should consider using something more persistent
+# than /tmp, since PDF generation is an expensive operation.
+# DMOJ_PDF_PROBLEM_CACHE = '/tmp'
+
+
+# The URL Texoid is running on
+TEXOID_URL = 'http://localhost:8888'
+# A directory accessible by the user running Texoid, as well as the web (nginx) user.
+# For optimal performance (since launching texlive is expensive), change this to something
+# more persistent than /tmp
+TEXOID_CACHE_ROOT = '/home/nyagami/texoid_cache'
+# The URL base TEXOID_CACHE_ROOT is configured to be served under in your webserver. For
+# example, if /tmp/texoid_cache/render.png exists, example.com/texoid/render.png should
+# serve it.
+TEXOID_CACHE_URL = '//localhost:8000/texoid/'
+
+# The URL Mathoid is running on
+MATHOID_URL = 'http://localhost:10044'
+# A directory accessible by the user running Mathoid, as well as the web (nginx) user.
+# For optimal performance, change this to something more persistent than /tmp
+MATHOID_CACHE_ROOT = '/home/nyagami/mathoid_cache'
+# The URL base MATHOID_CACHE_ROOT is configured to be served under in your webserver. For
+# example, if /tmp/mathoid_cache/render.png exists, example.com/mathoid/render.png should
+# serve it.
+MATHOID_CACHE_URL = '//localhost:8000/mathoid/'
